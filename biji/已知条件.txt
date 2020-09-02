@@ -1,0 +1,44 @@
+已知条件
+01-测试类  ApiTest()
+	001-获取token的函数 getToken()
+		请求类型:post
+		请求数据 'username':'wuya','password':'asd888'
+		url='http://127.0.0.1:5000/auth'
+		access_token
+	002-公用的请求头
+		'Content-Type':'application/json'
+		'Authorization': 'jwt {0}'.format(self.getToken)
+02-接口测试用例
+	001-添加书籍 test_book_001()    addBook
+		请求类型:post
+		请求数据:"author":"测试","done":True,"name":"API测试实战"
+		url='http://127.0.0.1:5000/v1/api/books'
+		请求头:公用的请求头
+                                self.write(r.json()[0]['datas']['id'])
+	002-查询书籍 test_book_002()     selBook
+		请求类型:get
+		请求头:公用的请求头
+		url='http://127.0.0.1:5000/v1/api/book/1  1:是动态参数
+	003-删除书籍 test_book_003      delBook
+		请求类型 delete
+		url='http://127.0.0.1:5000/v1/api/book/3'
+		请求头:公用请求头
+
+03-四个接口测试用例的断言
+	01-使用 assertEqual()
+	02-返回的数据形式 json
+	03-test_book_001
+		status 1002                       r.json()[0]['status'],1002
+		响应状态吗  200
+	04-test_book_002
+		响应状态吗 200
+		author 测试                      r.json()['datas'][0]['author'], '测试'
+		status 0                            r.json()['status'],0
+	05- test_book_003
+		status 1009                     r.json()['status'],1009
+		响应状态吗 200
+
+-----------------------------------------------
+test_book_001()  -添加书籍
+test_book_002()-查询书籍
+test_book_003()--删除书籍
